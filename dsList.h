@@ -28,6 +28,9 @@ public:
 	Node<T>* get_Head();
 	Node<T>* get_Tail();
 
+	T get(int i);
+	void set(int i,T d);
+
 	dsList();
 	~dsList();
 
@@ -184,6 +187,35 @@ template<class T>
 inline Node<T>* dsList<T>::get_Tail()
 {
 	return tail;
+}
+
+template<class T>
+inline T dsList<T>::get(int i)
+{
+	int j = 0;
+	Node<T> * tmp = head;
+	while (j < i && i< size-1)
+	{
+		tmp = tmp->next;
+		j++;
+	}
+	//delete[] tmp;
+	return tmp->data;
+	
+
+}
+
+template<class T>
+inline void dsList<T>::set(int i,T d)
+{
+	int j = 0;
+	Node<T>* tmp = head;
+	while (j < i&&i < size - 1)
+	{
+		tmp = tmp->next;
+		j++;
+	}
+	tmp->data = d;
 }
 
 
