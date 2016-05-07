@@ -19,7 +19,11 @@ public:
 	Customer(int gInt, int pInt, dsList <Product> prList) {
 		gen = static_cast<Gender>(gInt);
 		pl = static_cast<Place>(pInt);
+		for (int i = 0;i<prList.get_size()+1;i++) {
+			prodList.insertoTail(prList.get(i));
+		}
 		prodList = prList;
+
 	}
 	////////////////////////////
 	//some getters :
@@ -39,6 +43,12 @@ public:
 	//print all products in a list form : 
 	void printProductsList() {
 		prodList.printList();
+	}
+
+	int getProductListSize() {
+		
+		return prodList.get_size()+1;
+		
 	}
 
 	//endOfclass.
