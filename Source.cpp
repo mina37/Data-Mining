@@ -9,10 +9,8 @@
 #include"Customer.h"
 using namespace std;
 
+void getRandInputs() {
 
-
-
-void main() {
 	ifstream f("randinputs.txt");
 	int i = 0;
 	vector<Customer>c;//vector of Customers 
@@ -40,6 +38,13 @@ void main() {
 	/*c[0].printProductsList();
 	cout << "Gender: " << c[0].getGender()<<endl;
 	cout << "place : " << c[0].getPlace()<<endl;*/
+
+}
+
+
+void main() {
 	
+	getRandInputs();
+
 	
 } 
