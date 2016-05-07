@@ -194,7 +194,7 @@ inline T dsList<T>::get(int i)
 {
 	int j = 0;
 	Node<T> * tmp = head;
-	while (j < i && i< size-1)
+	while (j < i && i<= size-1)
 	{
 		tmp = tmp->next;
 		j++;
