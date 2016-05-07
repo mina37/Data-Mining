@@ -110,9 +110,9 @@ void main() {
 	//writing on output File :
 	ofstream fout("outputStat.txt");
 	fout << northNoOfCustomers << endl;
-	fout << northNoOfCustomers << endl;
-	fout << westNoOfCustomers << endl;
 	fout << southNoOfCustomers << endl;
+	fout << westNoOfCustomers << endl;
+	fout << eastNoOfCustomers << endl;
 	///////////////////////////////////////////////////////
 
 	//place No Of Products :
@@ -124,9 +124,10 @@ void main() {
 	placeNoOfProducts(c, northNoOfProducts, southNoOfProducts, westNoOfProducts, eastNoOfProducts);
 	
 	fout << northNoOfProducts << endl;
-	fout << northNoOfProducts << endl;
-	fout << westNoOfProducts << endl;
 	fout << southNoOfProducts << endl;
+	fout << westNoOfProducts << endl;
+	fout << eastNoOfProducts << endl;
+	fout.close();
 	
 
 	///---------------------------------------///
