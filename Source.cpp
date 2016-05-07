@@ -7,6 +7,7 @@
 #include "Enums.h"
 #include "string"
 #include"Customer.h"
+
 using namespace std;
 
 vector<Customer> parse_in()
@@ -34,6 +35,49 @@ vector<Customer> parse_in()
 	return c;
 }
 
+void placeNoOfCustomers(vector<Customer>cin,int& n, int &s,int &w,int &e) {
+	for (unsigned int i = 0;i<cin.size();i++) {
+	
+		if (cin[i].getPlace() == North) {
+			n++;
+		}
+		if (cin[i].getPlace() == West) {
+			w++;
+		}
+
+		if (cin[i].getPlace() == East) {
+			e++;
+		}
+
+		if (cin[i].getPlace() == South) {
+			s++;
+		}
+		
+	}
+
+}
+///////
+
+void placeNoOfProducts(vector<Customer>cin, int& n, int &s, int &w, int &e) {
+	for (unsigned int i = 0;i<cin.size();i++) {
+		if (cin[i].getPlace() == North) {
+			n+=cin[i].getProductListSize();
+		}
+
+		if (cin[i].getPlace() == West) {
+			w += cin[i].getProductListSize();
+		}
+
+		if (cin[i].getPlace() == South) {
+			s += cin[i].getProductListSize();
+		}
+
+		if (cin[i].getPlace() == East) {
+			e += cin[i].getProductListSize();
+		}
+	}
+
+}
 
 
 void main() {
@@ -57,13 +101,53 @@ void main() {
 	}
 
 	f.close();
+	//place no Of Customers : 
+	int northNoOfCustomers=0;
+	int southNoOfCustomers=0;
+	int westNoOfCustomers=0;
+	int eastNoOfCustomers=0;
+	placeNoOfCustomers(c, northNoOfCustomers, southNoOfCustomers, westNoOfCustomers, eastNoOfCustomers);
+	//writing on output File :
+	ofstream fout("outputStat.txt");
+	fout << northNoOfCustomers << endl;
+	fout << northNoOfCustomers << endl;
+	fout << westNoOfCustomers << endl;
+	fout << southNoOfCustomers << endl;
+	///////////////////////////////////////////////////////
 
+	//place No Of Products :
 
+	int northNoOfProducts = 0;
+	int southNoOfProducts = 0;
+	int westNoOfProducts = 0;
+	int eastNoOfProducts = 0;
+	placeNoOfProducts(c, northNoOfProducts, southNoOfProducts, westNoOfProducts, eastNoOfProducts);
+	
+	fout << northNoOfProducts << endl;
+	fout << northNoOfProducts << endl;
+	fout << westNoOfProducts << endl;
+	fout << southNoOfProducts << endl;
+	
+
+	///---------------------------------------///
 	//for testing purpose :
 
+	/*cout << "north  : " << northNoOfProducts << endl;
+	cout << "south  : " << southNoOfProducts << endl;
+	cout << "west  : " << westNoOfProducts << endl;
+	cout << "east  : " << eastNoOfProducts << endl;*/
+
 	/*c[0].printProductsList();
-	cout << "Gender: " << c[0].getGender()<<endl;
-	cout << "place : " << c[0].getPlace()<<endl;*/
-	
-	
-} 
+	cout<<"sizeCheck : "<<c[0].getProductListSize();*/
+	//cout << "Gender: " << c[0].getGender() << endl;
+	//cout << "place : " << c[0].getPlace() << endl;
+
+	////////
+
+	/*cout << "north 20 : "<< northNoOfCustomers << endl;
+	cout << "east 21 : " << eastNoOfCustomers << endl;
+	cout << "west 22 : " << westNoOfCustomers << endl;
+	cout << "south 23 : " << southNoOfCustomers << endl;*/
+
+
+}
