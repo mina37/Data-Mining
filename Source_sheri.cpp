@@ -10,45 +10,41 @@
 
 using namespace std;
 
-const int total_products = 17;
-ifstream f("randinputs.txt");
+const int total_products = 17; //number of products in the enum file
+ifstream f("randinputs.txt");	//file of the random inputs
 
+
+//Function that return vector of class costummer and sends year
 vector<Customer> parse_in(int &year)
 {
-	int i = 0;
 	vector<Customer>c;//vector of Customers 
 	int x;
 	f >> year;
-	cout << year << endl;
 	while(!f.eof())
 	{
 		int gender, place;
 		dsList<Product> products;
 		f >> gender;
-		if (gender == year)
+		if (gender == year) //break when you reach end of current year
 			break;
-		cout << gender << endl;
 		f >> place;
-		cout << place << endl;
 		while (true)
 		{
 			f >> x;
-			if (x == -1||x==year+1)
+			if (x == -1)
 				break;
 			products.insertoTail(static_cast<Product>(x));
 		}
 		c.push_back(Customer(gender, place, products));
-		cout << x << " ";
 	}
-	cout << endl;
 	return c;
 }
 
 void product_v_n_costumer()
 {
-	if (!f.is_open())
+	if (!f.is_open())							//if file of randoms is not open, open it
 		f.open("randinputs.txt",ifstream::in);
-	ofstream fx("productvscostumers.txt");
+	ofstream fx("productvscostumers.txt");		//file to write output to
 	vector<Customer> v;
 
 	int *num_of_products = new int[total_products];
@@ -58,7 +54,7 @@ void product_v_n_costumer()
 		v = parse_in(year);
 		fx << year << endl;
 
-		for (int i = 0; i < total_products; i++)
+		for (int i = 0; i < total_products; i++)	//setting the array to zero
 		{
 			num_of_products[i] = 0;
 		}
@@ -67,7 +63,7 @@ void product_v_n_costumer()
 		{
 			for (unsigned int j = 0; j < v.at(i).prodListReturn().get_size(); j++)
 			{
-				switch (v.at(i).prodListReturn().get(j))
+				switch (v.at(i).prodListReturn().get(j))	//incrementing the count of the product
 				{
 				case 101:
 					num_of_products[0]++;
@@ -123,16 +119,15 @@ void product_v_n_costumer()
 				}
 			}
 		}
-		for (int i = 0; i < total_products; i++)
+		for (int i = 0; i < total_products; i++)	//writing to file
 		{
 			fx << num_of_products[i] << endl;
-			cout << num_of_products[i] << endl;
 		}
-		v.clear();
+		v.clear();	//clearing the vector for next loop
 	}
-	delete[] num_of_products;
-	fx.close();
-	f.close();
+	delete[] num_of_products;	//clearing the array
+	fx.close();		//closing output file
+	f.close();		//closing input file
 }
 
 void gender_v_products()
@@ -163,7 +158,6 @@ void gender_v_products()
 		for (int i = 0; i < 2; i++)
 		{
 			fx << num_of_product[i] << endl;
-			cout << num_of_product[i] << endl;
 		}
 		v.clear();
 	}
@@ -173,14 +167,98 @@ void gender_v_products()
 }
 
 
+void placeNoOfCust() {
+	if (!f.is_open())							//if file of randoms is not open, open it
+		f.open("randinputs.txt", ifstream::in);
+	ofstream fx("placenoofcostumers.txt");
+	int *numberOfCustomers;
+		vector<Customer>c;
+	int ret[4] = { 0,0,0,0 };
+	for (int k = 0; k < 8; k++)
+	{
+		int year;
+		c = parse_in(year);
+		fx << year << endl;
+		for (unsigned int i = 0; i < c.size(); i++) {
+
+			if (c[i].getPlace() == North) {
+				ret[0]++;
+			}
+			if (c[i].getPlace() == West) {
+				ret[1]++;
+			}
+
+			if (c[i].getPlace() == East) {
+				ret[2]++;
+			}
+
+			if (c[i].getPlace() == South) {
+				ret[3]++;
+			}
+
+		}
+		for (int i = 0; i < 4; i++)
+		{
+			fx << ret[i] << endl;
+		}
+		c.clear();
+	}
+	fx.close();
+	f.close();
+}
+
+void placeNoOfProducts() {
+	if (!f.is_open())							//if file of randoms is not open, open it
+		f.open("randinputs.txt", ifstream::in);
+	ofstream fx("placenoofproducts.txt");
+	int *numberOfCustomers;
+	vector<Customer>c;
+	int ret[4] = { 0,0,0,0 };
+	for (int k = 0; k < 8; k++)
+	{
+		int year;
+		c = parse_in(year);
+		fx << year << endl;
+		for (unsigned int i = 0; i < c.size(); i++) {
+			if (c[i].getPlace() == North) {
+				ret[0] += c[i].prodListReturn().get_size();
+			}
+
+			if (c[i].getPlace() == West) {
+				ret[1] += c[i].prodListReturn().get_size();
+			}
+
+			if (c[i].getPlace() == South) {
+				ret[2] += c[i].prodListReturn().get_size();
+			}
+
+			if (c[i].getPlace() == East) {
+				ret[3] += c[i].prodListReturn().get_size();
+			}
+		}
+		for (int i = 0; i < 4; i++)
+		{
+			fx << ret[i] << endl;
+		}
+		c.clear();
+	}
+	fx.close();
+	f.close();
+}
+
+
 
 int main()
 {
-	//random();
+	random();
 
 	product_v_n_costumer();
 
 	gender_v_products();
+
+	placeNoOfCust();
+
+	placeNoOfProducts();
 	
 	
 }
