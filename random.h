@@ -22,7 +22,9 @@ int random()
 				f << rand() % 7 + (rand() % 3 + 1) * 100 << " ";
 			f << "-1" << endl;
 		}
-        f << year << endl;
+        f << year;
+        if (year!=2016)
+            f << endl;
 	}
 	f.close();
 	return 0;
