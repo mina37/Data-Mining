@@ -158,6 +158,7 @@ void gender_v_products()
 		for (int i = 0; i < 2; i++)
 		{
 			fx << num_of_product[i] << endl;
+			num_of_product[i] = 0;
 		}
 		v.clear();
 	}
@@ -200,6 +201,7 @@ void placeNoOfCust() {
 		for (int i = 0; i < 4; i++)
 		{
 			fx << ret[i] << endl;
+			ret[i] = 0;
 		}
 		c.clear();
 	}
@@ -239,6 +241,7 @@ void placeNoOfProducts() {
 		for (int i = 0; i < 4; i++)
 		{
 			fx << ret[i] << endl;
+			ret[i] = 0;
 		}
 		c.clear();
 	}
